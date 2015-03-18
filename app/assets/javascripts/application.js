@@ -12,5 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap.min
 //= require turbolinks
+//= require nprogress
+//= require nprogress-turbolinks
 //= require_tree .
+
+// Auto-hide alert after 5 seconds
+window.setTimeout(function() {
+  $(".alert").fadeTo(500, 0).slideUp(500, function() {
+    $(this).remove();
+  });
+}, 3000);

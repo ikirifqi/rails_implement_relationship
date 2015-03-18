@@ -1,14 +1,61 @@
 <!DOCTYPE html>
+
 <html>
-<head>
-  <title>RailsImplementRelationship</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Implement Relationship and CRUD</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
 
-<%= yield %>
+  <body>
+    <!-- Menubar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <%= link_to 'Relationship & CRUD', root_path, :class => 'navbar-brand' %>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <%= link_to importer_export_path do %>
+                <span class="glyphicon glyphicon-export"></span>
+                Export data
+              <% end %>
+            </li>
+            <li>
+              <%= link_to importer_import_path do %>
+                <span class="glyphicon glyphicon-import"></span>
+                Import data
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_article_path do %>
+                <span class="glyphicon glyphicon-plus"></span>
+                Post new article
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-</body>
+    <div class="container">
+      <%- if notice %>
+        <div class="alert alert-info" role="alert">
+          <strong>Info</strong>
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  </body>
 </html>

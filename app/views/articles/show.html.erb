@@ -1,0 +1,52 @@
+<div class="text-center">
+  <h1 class="page-header"><%= @article.title %></h1>
+</div>
+
+<div class="article-full">
+  <%= @article.body.html_safe %>
+</div>
+
+<hr>
+<div class="text-right">
+  <%= @article.created_at.strftime("%d %B %Y - %H:%M") %> |
+  <%= link_to 'Edit', edit_article_path(@article) %> |
+  <%= link_to 'Back', articles_path %>
+</div>
+<hr>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%- if @comments.count.zero? %>
+      <div class="text-center"><h4>No comment for this article</h4></div>
+    <%- else %>
+      <%- @comments.each do |comment| %>
+        <%- next if comment.id.nil? %>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <%= comment.created_at.strftime("%d %B %Y - %H:%M") %>
+            <%= link_to article_comment_path(:article_id => @article, :id => comment), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'close' do %>
+              <span aria-hidden="true">&times;</span>
+            <% end %>
+          </div>
+
+          <div class="panel-body">
+            <%= comment.body %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="panel-footer">
+    <%= form_for [@article, @comment] do |f| %>
+      <div class="form-group">
+        <%= f.text_area :body, :class => 'form-control', :rows => 4 %>
+      </div>
+
+      <div class="form-group text-right">
+        <%= f.submit 'Post comment', :class => 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>

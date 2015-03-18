@@ -10,6 +10,15 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require nprogress
+ *= require nprogress-bootstrap
  *= require_tree .
  *= require_self
  */
+
+body { padding-top: 64px; }
+
+.page-title { margin-bottom: 40px; }
+.article-title { margin-top: 0px; }
+.article-time { font-size: 12px; margin-top: 10px; margin-bottom: 0px; }
+.article-full { font-size: 16px; text-align: justify; margin-top: 32px; }

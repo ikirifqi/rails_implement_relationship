@@ -1,0 +1,32 @@
+<h1 class="page-title">Listing Articles</h1>
+
+<%- if @articles.count.zero? %>
+  <div class="text-center"><h4>No article found</h4></div>
+<%- else %>
+  <%- @articles.each do |article| %>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="article-title"><%= link_to article.title, article %></h3>
+        <h3 class="article-time">
+          <span class="glyphicon glyphicon-pencil"></span>
+          <%= article.created_at.strftime("%d %B %Y - %H:%M") %>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p><%= truncate article.body, :length => 256, :omission => '...' %></p>
+      </div>
+      <div class="panel-footer text-right">
+        <%= link_to edit_article_path(article) do %>
+          <span class="glyphicon glyphicon-edit"></span>
+        <% end %>
+        <%= link_to article, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <span class="glyphicon glyphicon-remove"></span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="text-right">
+    <%= paginate @articles %>
+  </div>
+<% end %>
