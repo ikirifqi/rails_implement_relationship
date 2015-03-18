@@ -3,11 +3,18 @@ class ImporterController < ApplicationController
   end
 
   def export
+    @as_article = params[:article].present?
+    @article = Article.find(params[:article]) if @as_article
   end
 
   def download_file
-    @articles = Article.all
-    @comments = Comment.all
+    if params[:article].present?
+      @articles = Article.where(:id => params[:article])
+      @comments = @articles.first.comments
+    else
+      @articles = Article.all
+      @comments = Comment.all
+    end
 
     xlsx = Axlsx::Package.new
     wb = xlsx.workbook

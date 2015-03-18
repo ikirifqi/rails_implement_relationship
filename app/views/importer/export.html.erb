@@ -1,4 +1,8 @@
-<h1 class="page-title">Export Data</h1>
+<%- if @as_article %>
+  <h1 class="page-title">Export Article: <%= @article.title %></h1>
+<%- else %>
+  <h1 class="page-title">Export Data</h1>
+<% end %>
 
 <p>Please download exported file from the following button</p>
-<%= link_to 'Export Data', importer_download_file_path, :class => 'btn btn-success', data: { no_turbolink: true } %>
+<%= link_to 'Export Data', @as_article ? importer_download_file_path + '?article=' + @article.id.to_s : importer_download_file_path, :class => 'btn btn-success', data: { no_turbolink: true } %>

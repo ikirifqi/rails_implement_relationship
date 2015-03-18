@@ -9,8 +9,18 @@
 <hr>
 <div class="text-right">
   <%= @article.created_at.strftime("%d %B %Y - %H:%M") %> |
-  <%= link_to 'Edit', edit_article_path(@article) %> |
-  <%= link_to 'Back', articles_path %>
+  <%= link_to edit_article_path(@article) do %>
+    <span class="glyphicon glyphicon-edit"></span>
+    Edit
+  <% end %> |
+  <%= link_to importer_export_path + '?article=' + @article.id.to_s do %>
+    <span class="glyphicon glyphicon-export"></span>
+    Export Article
+  <% end %> |
+  <%= link_to articles_path do %>
+    <span class="glyphicon glyphicon-arrow-left"></span>
+    Back to the list
+  <% end %>
 </div>
 <hr>
 
