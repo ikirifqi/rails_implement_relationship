@@ -50,6 +50,10 @@ class ImporterController < ApplicationController
         row = Hash[[header, spreadsheet.row(i)].transpose]
         new_row = eval("#{spreadsheet.default_sheet.singularize}").new(row)
 
+        # Check existance on database, if the record already exist, destroy it with it's comment
+        checker = eval("#{spreadsheet.default_sheet.singularize}").find(row['id'].to_i) rescue nil
+        checker.destroy unless checker.nil?
+
         raise 'Failed to save, maybe invalid column' unless new_row.save!
 
         total_row += 1
